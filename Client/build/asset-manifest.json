@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9f7b399e.css",
+    "main.js": "/static/js/main.f80fa78e.js",
+    "static/media/hero-bild.jpg": "/static/media/hero-bild.295a077a6cab66fd3bbf.jpg",
+    "static/media/adsett.png": "/static/media/adsett.4be1d9df42b23ac58690.png",
+    "static/media/JaktHarryLogo.png": "/static/media/JaktHarryLogo.2ecc3d5269413774a6cd.png",
+    "static/media/edit.png": "/static/media/edit.e0fe9baf973ee2a23e8f.png",
+    "static/media/star-outline.svg": "/static/media/star-outline.b410fa67ca2a2df4a5d58c413b36261d.svg",
+    "static/media/star-half.svg": "/static/media/star-half.1fb90c36e1903990706e0303d8bda1cd.svg",
+    "index.html": "/index.html",
+    "static/media/star.svg": "/static/media/star.14167e335b3383a9fc087be3d59a035c.svg",
+    "main.9f7b399e.css.map": "/static/css/main.9f7b399e.css.map",
+    "main.f80fa78e.js.map": "/static/js/main.f80fa78e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9f7b399e.css",
+    "static/js/main.f80fa78e.js"
+  ]
+}
