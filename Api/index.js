@@ -13,12 +13,13 @@ import dataFetchingRimbo from './data-fetching/dataFetchingRimbo.js';
 
 const app = express()
 app.use(express.json());
-app.use(cookieParser());
+
 
 app.use(cors({
   origin: true,
   credentials: true
 }));
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin',  'http://localhost:3030' , 'https://jaktharry-app.netlify.app'); // Allow all origins (replace with specific origins if needed)

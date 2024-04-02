@@ -27,6 +27,7 @@ export const AuthContextProvider = ({children})=>{
 
   const logout = async(inputs)=>{
     await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/logout`);
+    localStorage.removeItem("accessToken")
     setCurrentUser(null);
   };
 

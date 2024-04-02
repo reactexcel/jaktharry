@@ -11,7 +11,9 @@ const Single = () => {
   const [post, setPost] = useState({});
   const [comment, setComment] = useState("");
   const [addPostRes , setAddPostRes] = useState("")
-  const [getPostRes , setgetPostRes] = useState([])
+  const [ getPostRes ,  setgetPostRes] = useState("")
+
+  const [error , setError] = useState(false)
   const [showToast, setShowToast] = useState(false); 
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ const Single = () => {
         );
         setPost(response.data);
       } catch (error) {
+        
         console.log(error);
       }
     };
@@ -58,21 +61,34 @@ const Single = () => {
   const handleUserComment = async (postId, e) => {
     e.preventDefault();
     try {
+    
       const newComment = e.target.elements.newscomment.value;
       setComment(newComment);
       const values = {
         postId : postId, 
         comment: newComment
       }
+
        // making request too post the comment on news post 
+
+       const token = localStorage.getItem("accessToken");
+
+    // Set the Authorization header with the token value
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+
       const response = await axios.post(
         "http://116.202.210.102:6969/api/comments/add",
-        values
+        values, config
       );
       setAddPostRes(response)
       setShowToast(true);
        e.target.elements.newscomment.value = "";
     } catch (error) {
+      setError("Urnauthorized User Please login!!")
       console.log("Error in Adding Comments", error);
     }
     setComment("");
@@ -180,7 +196,7 @@ const Single = () => {
   const paragraphs = post.text ? splitTextAfterThirdDot(post.text) : [];
 
   return (
-    <Container className="single">
+   <Container className="single">
       <div className="content">
         <div>
           <div className="img">
@@ -228,21 +244,27 @@ const Single = () => {
               }}
             />
           ))}
-          <div style={{ marginTop: "20px" }}>
-            <h5> Posta en kommentar</h5>
-            <form onSubmit={(e) => handleUserComment(postId, e)}>
-              <div className="comment-section">
-                <textarea
-                  name="newscomment"
-                  id="newscomment"
-                  cols="26"
-                  placeholder="Gå med i diskussionen..."></textarea>
-                
-                <div>
-                  <Button type="submit" variant="primary">
-                    Add a Comment
-                  </Button>
+
+          {currentUser && post.cat !== "aktiviteter" && (
+           <>
+            <div style={{ marginTop: "20px" }}>
+              <h5>Posta en kommentar</h5>
+              <form onSubmit={(e) => handleUserComment(postId, e)}>
+                <div className="comment-section">
+                  <textarea
+                    name="newscomment"
+                    id="newscomment"
+                    cols="26"
+                    placeholder="Gå med i diskussionen..."></textarea>
+                  <div>
+                    <div style={{color:"red", padding :"4px"}}>{error}</div>
+                    <Button type="submit" variant="primary">
+                      Add a Comment
+                    </Button>
+                  </div> 
                 </div>
+              </form>
+            </div>
                <Card style={{ width: "100%", border: "0px"}}>
                <Card.Body> 
               {getPostRes.length === 0 ? (
@@ -262,12 +284,11 @@ const Single = () => {
     )}
   </Card.Body>
 </Card>
-       </div>
-            </form>
-          </div>
+           </>
+          )}
         </div>
 
-        {post.cat === "aktiviteter" && (
+        {currentUser && post.cat === "aktiviteter" && (
           <div className="text-center">
             <Button
               onClick={(e) => handleUserSignUp(post.id, e)}
@@ -303,3 +324,6 @@ const Single = () => {
 };
 
 export default Single;
+
+
+
