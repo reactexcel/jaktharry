@@ -1372,3 +1372,35 @@ $gray:rgb(78, 78, 78);
   }
 
 }
+
+
+
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;  
+  resize: auto;
+  outline: none;
+}
+
+.comment-section{
+  display: flex;
+  height: 100%;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.show-comments{
+  border: 2px solid #ccc;
+  padding: 10px;
+}
+
+.comment-box{ 
+  padding-top: 10px;
+}
